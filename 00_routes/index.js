@@ -1,9 +1,11 @@
 import {Router} from "express";
 
 import views from "../02_controllers/views.js";
+import authRoutes from "../00_routes/auth.js";
 
-const selectorRouter = new Router();
+const SelectorRouter = new Router();
 
-selectorRouter.get('/',views.viewRender('index'));
+SelectorRouter.get('/',views.viewRender('index'));
+SelectorRouter.use('/auth',authRoutes)
 
-export default selectorRouter;
+export default SelectorRouter;
