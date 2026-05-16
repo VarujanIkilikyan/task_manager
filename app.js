@@ -3,8 +3,8 @@ import {createServer} from 'http';
 import 'dotenv/config'
 import logger from 'morgan';
 
-import SelectorRouter from './00_routers/index.js';
-import errorHandler from "./02_middleware/errorHandler.js";
+import SelectorRouter from './00_routes/index.js';
+import errorHandler from "./01_middlewares/errorHandler.js";
 
 
 const app = express();
