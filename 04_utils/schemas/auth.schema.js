@@ -12,18 +12,17 @@ export default {
 
     }),
     register: joi.object({
-        name: joi.string().required().messages({
+        username: joi.string().min(3).max(50).required().messages({
             'string.empty': 'Имя обязательно'
         }),
-        email: joi.string().email().required().messages({
+        email: joi.string().email().min(5).max(100).required().messages({
             'string.empty': 'Email обязателен',
             'string.email': 'Email должен быть корректным',
         }),
-        password: joi.string().required().messages({
+        password: joi.string().min(6).max(255).required().messages({
             'string.empty': 'Пароль обязателен',
         }),
-        age: joi.number().required().messages({
-            'number.base': 'Возраст обязателен',
-        }),
+    }).unknown(false).messages({
+        'object.unknown': 'некоректные данные'
     })
 }
