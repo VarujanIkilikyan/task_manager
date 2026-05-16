@@ -5,3 +5,5 @@ import views from "../02_controllers/views.js";
 const selectorRouter = new Router();
 
 selectorRouter.get('/',views.viewRender('index'));
+
+export default selectorRouter;

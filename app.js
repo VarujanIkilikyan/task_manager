@@ -2,6 +2,7 @@ import express from 'express';
 import {createServer} from 'http';
 import 'dotenv/config'
 import logger from 'morgan';
+import path from 'path';
 
 import SelectorRouter from './00_routes/index.js';
 import errorHandler from "./01_middlewares/errorHandler.js";
@@ -13,7 +14,7 @@ const server = createServer(app);
 app.use(logger('dev'))
 //view engin setup
 app.set('view engine', 'ejs');
-app.set('views','/views');
+app.set('views',path.resolve()+'/views');
 app.use(express.static('/public'));
 
 //transform post body req.body
