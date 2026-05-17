@@ -80,5 +80,21 @@ export default {
             return null;
         }
     },
+    async checkIdExists(userId) {
+        try {
+            const [result = null] = (await DbMysql.query(
+                `SELECT *
+       FROM users
+       WHERE userId = ?
+       limit 1;`,
+                [userId]
+            )) || [];
+
+            return !_.isEmpty(result);
+        } catch (error) {
+            console.error(error);
+            return null;
+        }
+    },
 }
 

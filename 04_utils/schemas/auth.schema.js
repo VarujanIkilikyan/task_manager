@@ -10,6 +10,8 @@ export default {
             'string.empty': 'Пароль обязателен',
         }),
 
+    }).unknown(false).messages({
+        'object.unknown': 'некоректные данные'
     }),
     register: joi.object({
         username: joi.string().min(3).max(50).required().messages({
