@@ -5,7 +5,7 @@ import CryptoJS from 'crypto-js';
 import DbMysql from "../05_clients/db.mysql.js";
 
 export default {
-    async create({username, email, password}) {
+    async create(username, email, password) {
         try {
             const result = await DbMysql.query(
                 `insert into users (username, email, password)

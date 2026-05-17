@@ -1,6 +1,6 @@
 import HttpErrors from 'http-errors';
 import usersModel from '../03_models/userModel.js';
-import
+import bcrypt from "bcrypt";
 import moment from 'moment';
 
 
@@ -29,8 +29,9 @@ export default {
                     }
                 })
             }
+            const hashedPassword = await bcrypt.hash(password, 10);
 
-            const user = await usersModel.create()
+            const user = await usersModel.create(username,email,hashedPassword)
 
             delete user.password;
 
