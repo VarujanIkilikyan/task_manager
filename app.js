@@ -4,6 +4,8 @@ import 'dotenv/config'
 import logger from 'morgan';
 import path from 'path';
 
+import './migrate.js';
+
 import SelectorRouter from './00_routes/index.js';
 import errorHandler from "./01_middlewares/errorHandler.js";
 
