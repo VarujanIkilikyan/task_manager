@@ -1,5 +1,6 @@
 import HttpErrors from 'http-errors';
-import usersModel from '../models/usersModel.js';
+import usersModel from '../03_models/userModel.js';
+import
 import moment from 'moment';
 
 
@@ -9,8 +10,17 @@ export default {
     async registration (req, res, next) {
         try {
 
-            const {name,email,password,age} = req.body;
-            if(await usersModel.checkMemberByEmail(email)) {
+            const {username,email,password} = req.body;
+            if(await usersModel.checkUsernameExists(username)) {
+
+                throw  new HttpErrors(422,{
+                    message: 'Validation error',
+                    errors:{
+                        email: 'имя уже сушествует',
+                    }
+                })
+            }
+            if(await usersModel.checkEmailExists(email)) {
 
                 throw  new HttpErrors(422,{
                     message: 'Validation error',
@@ -19,12 +29,8 @@ export default {
                     }
                 })
             }
-            const user = await usersModel.createUser({
-                name,
-                email,
-                password: usersModel.hashPassword(password),
-                age
-            })
+
+            const user = await usersModel.create()
 
             delete user.password;
 
@@ -38,4 +44,5 @@ export default {
             next(e);
         }
     },
+}
 
