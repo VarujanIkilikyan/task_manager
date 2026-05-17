@@ -1,6 +1,5 @@
 import _ from 'lodash';
-import bcrypt from 'bcrypt';
-import CryptoJS from 'crypto-js';
+
 
 import DbMysql from "../05_clients/db.mysql.js";
 
@@ -13,9 +12,8 @@ export default {
                 [username, email, password]
             );
 
-            const id = _.get(result, '0.insertId', null);
 
-            return await this.findUserById(id);
+            return await this.findUserByEmail(email);
         } catch (error) {
             console.error(error);
             return null;

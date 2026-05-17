@@ -3,9 +3,9 @@ export default {
         res.status(404).render('404')
     },
     errors: (err, req, res, next) => {
-        res.status(err.status).json({
+        res.status(err.status|| 500).json({
             message: err.message,
-            error: err.error? err.error : {}
+            errors: err.errors ? err.errors : {}
         })
 
     }
