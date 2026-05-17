@@ -10,4 +10,6 @@ const authRoutes = Router();
 authRoutes.get('/register',views.viewRender('register'));
 authRoutes.post('/register',validate(schemas.register,'body'),controller.registration);
 
+authRoutes.get('/login',views.viewRender('login'));
+authRoutes.post('/login',validate(schemas.login,'body'),controller.login);
 export default authRoutes;

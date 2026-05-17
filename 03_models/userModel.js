@@ -79,6 +79,6 @@ export default {
             console.error(error);
             return null;
         }
-    }
+    },
 }
 
