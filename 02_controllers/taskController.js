@@ -35,5 +35,20 @@ export default {
         }catch (e){
             next(e);
         }
+    },
+    async getTaskById(req, res, next) {
+        try {
+            const {id} = req.params;
+
+
+            const task = await taskModel.getTaskById(id,req.userId);
+            res.json({
+                message: 'single task',
+                task
+            })
+        }catch (e){
+            next(e);
+        }
     }
+
 }

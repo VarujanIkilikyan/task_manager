@@ -8,6 +8,10 @@ import controller from "../02_controllers/taskController.js";
 
 const tasksRoutes = Router();
 
+
 tasksRoutes.post('/',authorization,validate(schemas.create,'body'),controller.createNewTask);
+
 tasksRoutes.get('/',authorization,controller.getAllTasks)
+tasksRoutes.get('/:id',authorization,controller.getTaskById)
+
 export default tasksRoutes;
