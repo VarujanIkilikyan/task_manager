@@ -20,7 +20,7 @@ export default {
             return null;
         }
     },
-    async getAllTasksByUser(userId, page,limit) {
+    async getAllTasksByUser(userId, page, limit) {
 
         const count = await this.getTotalTasksCountByUser(userId);
 
@@ -33,13 +33,14 @@ export default {
              offset ?`,
             [userId, limit, offset]
         );
-        return {tasks,
-            pagination:{
-                "currentPage":page,
+        return {
+            tasks,
+            pagination: {
+                "currentPage": page,
                 "totalPages": Math.ceil(count / limit),
                 "totalTasks": count,
-                "tasksPerPage":limit,
-                }
+                "tasksPerPage": limit,
+            }
         };
 
     },
@@ -78,7 +79,29 @@ export default {
     async getTaskCountByDateAndUser(taskDate, userId) {
 
     },
-    async updateTask(id, userId, taskData) {
+    async updateTask(id, userId, {title, description,completed, taskDate},returnData= false) {
+        try {
+            const result = await DbMysql.query(
+                `
+                    update tasks
+                    set title = ?,
+                        description  = ?,
+                        completed = ?,
+                        taskDate = ?
+                    WHERE userId = ?
+                      AND taskId = ? LIMIT 1;`,
+                [title, description, completed, taskDate,userId,id],
+            );
+
+            const affectedRows = _.get(result, '0.affectedRows', null);
+
+            return affectedRows > 0
+                ? await this.getTaskById(id,userId)
+                :returnData ;
+        } catch (error) {
+            console.error(error);
+            return null;
+        }
 
     },
     async deleteTask(id, userId) {

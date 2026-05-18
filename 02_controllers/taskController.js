@@ -49,6 +49,21 @@ export default {
         }catch (e){
             next(e);
         }
+    },
+    async updateTask(req, res, next) {
+        try {
+            const {id} = req.params;
+
+
+            const task = await taskModel.updateTask(id,req.userId,req.body);
+            res.json({
+                message: 'updatet task task',
+                task
+            })
+        }catch (e){
+            next(e);
+        }
     }
+
 
 }
