@@ -14,5 +14,6 @@ tasksRoutes.post('/',authorization,validate(schemas.create,'body'),controller.cr
 tasksRoutes.get('/',authorization,controller.getAllTasks)
 tasksRoutes.get('/:id',authorization,controller.getTaskById)
 tasksRoutes.put('/:id',authorization,controller.updateTask)
+tasksRoutes.delete('/:id',authorization,controller.deleteTask)
 
 export default tasksRoutes;

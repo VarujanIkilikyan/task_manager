@@ -57,12 +57,26 @@ export default {
 
             const task = await taskModel.updateTask(id,req.userId,req.body);
             res.json({
-                message: 'updatet task task',
+                message: 'updatet task',
                 task
             })
         }catch (e){
             next(e);
         }
+    },
+    async deleteTask(req, res, next) {
+        try {
+            const {id} = req.params;
+
+            const task = await taskModel.deleteTask(id,req.userId);
+            res.json({
+                message: 'deleted task',
+                task
+            })
+        }catch (e){
+            next(e);
+        }
+
     }
 
 

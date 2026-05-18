@@ -105,7 +105,21 @@ export default {
 
     },
     async deleteTask(id, userId) {
-
+        try {
+            const del= await this.getTaskById(id,userId);
+            const result = await DbMysql.query(
+                `
+                    DELETE
+                    FROM tasks
+                    WHERE userId = ?
+                      AND taskId = ? LIMIT 1;`,
+                [userId,id],
+            );
+            return del;
+        } catch (error) {
+            console.error(error);
+            return null;
+        }
     }
 
 
