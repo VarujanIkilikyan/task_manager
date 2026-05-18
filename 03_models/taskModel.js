@@ -24,6 +24,18 @@ export default {
 
     },
     async getTotalTasksCountByUser(userId) {
+        try {
+            const [[{ count }]] = await DbMysql.query(
+                `SELECT COUNT(*) AS count
+                 FROM tasks
+                 WHERE userId = ?`,
+                [userId]
+            );
+            return count || 0;
+        }catch (error) {
+            console.error(error);
+            return null;
+        }
 
     },
     async getTaskById(taskId, userId) {
@@ -56,3 +68,25 @@ export default {
 
 }
 
+export async function getUsersList(page = 1, limit = 20) {
+    try {
+        const [[{ count }]] = await DbMysql.query(
+            `SELECT count(*) as count
+       FROM users;`,
+        );
+
+        const offset = Math.ceil((page - 1) * limit);
+
+        const [result] = await DbMysql.query(
+            `SELECT id, name, age, email
+       FROM users
+       limit ? offset ?`,
+            [limit, offset]
+        );
+
+        return { result, count, page, offset };
+    } catch (error) {
+        console.error(error);
+        return []
+    }
+}
