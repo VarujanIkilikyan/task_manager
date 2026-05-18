@@ -15,7 +15,7 @@ import DbMysql from './05_clients/db.mysql.js';
     console.log('-> User table successfully created');
     await DbMysql.query(`
     CREATE TABLE if not exists tasks (
-  id VARCHAR(36) PRIMARY KEY,
+  taskId INT AUTO_INCREMENT PRIMARY KEY,
   userId VARCHAR(36) NOT NULL,
   title VARCHAR(255) NOT NULL,
   description TEXT,
@@ -26,8 +26,8 @@ import DbMysql from './05_clients/db.mysql.js';
 );
 `);
     console.log('-> Tasks table successfully created');
-    await DbMysql.query(`CREATE INDEX idx_taskDate ON tasks(taskDate);`);
-    await DbMysql.query(`CREATE INDEX idx_userId ON tasks(userId);`);
+    // await DbMysql.query(`CREATE INDEX IF NOT EXISTS idx_taskDate ON tasks(taskDate);`);
+    // await DbMysql.query(`CREATE INDEX IF NOT EXISTS idx_userId ON tasks(userId);`);
     console.log('Migration finished successfully.');
 })();
 

@@ -11,10 +11,10 @@ export default {
                  values (?, ?, ?, ?);`,
                 [userId, title, description, taskDate],
             );
-            const id = _.get(result, '0.insertId', null);
+            const taskId = _.get(result, '0.insertId', null);
 
 
-            return await this.getTaskById(id, userId);
+            return await this.getTaskById(taskId, userId);
         } catch (error) {
             console.error(error);
             return null;
@@ -26,14 +26,14 @@ export default {
     async getTotalTasksCountByUser(userId) {
 
     },
-    async getTaskById(id, userId) {
+    async getTaskById(taskId, userId) {
         try {
             const [result = null] = (await DbMysql.query(
                 `SELECT *
                  FROM tasks
                  WHERE userId = ?
-                   AND id = ? LIMIT 1;`,
-                [userId, id]
+                   AND taskId = ? LIMIT 1;`,
+                [userId, taskId]
             )) || [];
 
             return _.head(result) || null;
