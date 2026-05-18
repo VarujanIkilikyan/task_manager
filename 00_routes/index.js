@@ -9,6 +9,6 @@ const SelectorRouter = new Router();
 
 SelectorRouter.get('/',authorization,views.viewRender('index'));
 SelectorRouter.use('/auth',authRoutes)
-SelectorRouter.use('/post',tasksRoutes)
+SelectorRouter.use('/tasks',tasksRoutes)
 
 export default SelectorRouter;
